@@ -1,7 +1,7 @@
 import db from "../lib/db";
-import { Document } from "../types/documentTypes";
+import { CreateDocument, Document } from "../types/documentTypes";
 
-export async function createDocumentModel(document: Document) {
+export async function createDocumentModel(document: CreateDocument) {
     try {
         const [result] =await db.execute
         (`INSERT INTO documents 
@@ -43,7 +43,7 @@ export async function getAllDocumentModel() {
     }
 }
 
-export async function updateDocumentModel(documentId: number, document: Document) {
+export async function updateDocumentModel(documentId: number, document: CreateDocument) {
     try {
         const [result] =await db.execute(`UPDATE documents SET 
                 title = ?, description = ?, file_name = ?,
@@ -65,7 +65,7 @@ export async function updateDocumentModel(documentId: number, document: Document
     }
 }
 
-export async function deleteDocument(documentId: number) {
+export async function deleteDocumentModel(documentId: number) {
     try {
         const [result] =await db.execute("DELETE FROM documents WHERE document_id=?", [documentId])
 
