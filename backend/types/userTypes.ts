@@ -1,11 +1,11 @@
-export interface CreateUser {
+export interface createUserType {
     full_name: string;
     email: string;
     password: string;
     role: "ADMIN" | "USER";
 }
 
-export interface User {
+export interface userType {
     user_id: number;
     full_name: string;
     email: string;
@@ -15,7 +15,7 @@ export interface User {
     updated_at: Date;
 }
 
-export interface LoginUser {
+export interface loginUserType {
     email: string;
     password: string;
 }
