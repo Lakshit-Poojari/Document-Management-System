@@ -1,7 +1,7 @@
 import db from "../lib/db";
 import { Document } from "../types/documentTypes";
 
-export async function createDocument(document: Document) {
+export async function createDocumentModel(document: Document) {
     try {
         const [result] =await db.execute
         (`INSERT INTO documents 
@@ -21,7 +21,7 @@ export async function createDocument(document: Document) {
     }
 }
 
-export async function getSingleDocument(documentId: number) {
+export async function getSingleDocumentModel(documentId: number) {
     try {
         const [result] =await db.execute("SELECT * FROM documents WHERE document_id= ?", [documentId])
 
@@ -32,7 +32,7 @@ export async function getSingleDocument(documentId: number) {
     }
 }
 
-export async function getDocuments() {
+export async function getAllDocumentModel() {
     try {
         const [result] =await db.execute("SELECT * FROM documents ORDER BY document_id DESC")
 
@@ -43,7 +43,7 @@ export async function getDocuments() {
     }
 }
 
-export async function updateDocument(documentId: number, document: Document) {
+export async function updateDocumentModel(documentId: number, document: Document) {
     try {
         const [result] =await db.execute(`UPDATE documents SET 
                 title = ?, description = ?, file_name = ?,
