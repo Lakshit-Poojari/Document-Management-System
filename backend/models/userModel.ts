@@ -1,9 +1,10 @@
+import { RowDataPacket } from "mysql2";
 import db from "../lib/db";
-import { CreateUser, LoginUser } from "../types/userTypes";
+import { createUserType, loginUserType } from "../types/userTypes";
 
-export async function createUser(user: CreateUser) {
+export async function createUserModel(user: createUserType) {
     try {
-        const [result] = await db.execute("INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)",
+        const [result] = await db.execute<RowDataPacket[]>("INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)",
             [user.full_name, user.email, user.password, user.role]
         );
         return result;
@@ -13,9 +14,9 @@ export async function createUser(user: CreateUser) {
     }
 }
 
-export async function getUser(user: LoginUser) {
+export async function getUserModel(email: string) {
     try{
-        const [rows] = await db.execute("SELECT * FROM users WHERE email = ? AND password = ?", [user.email, user.password]);
+        const [rows] = await db.execute("SELECT * FROM users WHERE email = ?", [email ]);
         return rows;
     } 
     catch (error) {
