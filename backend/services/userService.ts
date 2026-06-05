@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken"
 export async function createUserService(user:createUserType) {
     try {
 
-        if (!user.full_name || !user.email || !user.password || !user.role ) {
+        if (!user.full_name || !user.email || !user.password_hash || !user.role ) {
             throw new Error("All fields are required");
         }
 
@@ -17,9 +17,9 @@ export async function createUserService(user:createUserType) {
             throw new Error("User already exists");
         }
 
-        const hashedPassword = await bcrypt.hash(user.password, 10)
+        const hashedPassword = await bcrypt.hash(user.password_hash, 10)
 
-        const result = await createUserModel({...user, password: hashedPassword})
+        const result = await createUserModel({...user, password_hash: hashedPassword})
 
         return result
 
@@ -32,7 +32,7 @@ export async function createUserService(user:createUserType) {
 export async function loginuserService(loginUser:loginUserType) {
     try {
         
-        if (!loginUser.email || !loginUser.password) {
+        if (!loginUser.email || !loginUser.password_hash) {
             throw new Error("All fields are required");
         }
 
@@ -45,7 +45,7 @@ export async function loginuserService(loginUser:loginUserType) {
 
         const user = userExist[0]
 
-        const isPasswordVaild = await bcrypt.compare(loginUser.password, user.password_hash)
+        const isPasswordVaild = await bcrypt.compare(loginUser.password_hash, user.password_hash)
 
         if (!isPasswordVaild) {
             throw new Error("Invalid credential")

@@ -4,8 +4,8 @@ import { createUserType, loginUserType } from "../types/userTypes";
 
 export async function createUserModel(user: createUserType) {
     try {
-        const [result] = await db.execute<RowDataPacket[]>("INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)",
-            [user.full_name, user.email, user.password, user.role]
+        const [result] = await db.execute<RowDataPacket[]>("INSERT INTO users (full_name, email, password_hash, role) VALUES (?, ?, ?, ?)",
+            [user.full_name, user.email, user.password_hash, user.role]
         );
         return result;
     } catch (error) {
