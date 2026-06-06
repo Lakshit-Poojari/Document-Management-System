@@ -1,12 +1,13 @@
 "use client"
 
 export default function Home() {
+
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center px-8 bg-amber-50">
         <div className="max-w-4xl text-center">
           <h1 className="text-5xl font-bold text-amber-900 mb-6">
-              This is Document System Management
+              This is Document Management System
           </h1>
         </div>
 
