@@ -1,38 +1,51 @@
 import Link from "next/link"
+import ThemeToggle from "./Toggle"
 
 export default function Navbar() {
   return (
     <>
-        <header className="bg-white shadow-md">
+        <header className="
+sticky top-0
+z-50
+bg-white
+dark:bg-slate-900
+shadow-md
+dark:shadow-black/50
+border-b
+border-gray-200
+dark:border-slate-800
+">
             <nav className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
 
                 <div>
-                    <Link href="/" className="text-3xl font-bold text-amber-600">DMS</Link>
+                    <Link href="/" className="text-3xl font-bold text-amber-600 ">DMS</Link>
                 </div>
 
                 {/* Navigation */}
                 <div className="flex items-center gap-8">
 
-                    <Link href="/" className="hover:text-amber-600 transition">Home</Link>
+                    <Link href="/" className="hover:text-amber-600 transition focus:underline">Home</Link>
 
-                    <Link href="/about" className="hover:text-amber-600 transition">About</Link>
+                    <Link href="/about" className="hover:text-amber-600 transition focus:underline">About</Link>
 
-                    <Link href="/document" className="hover:text-amber-600 transition">Documents</Link>
+                    <Link href="/document" className="hover:text-amber-600 transition focus:underline">Documents</Link>
 
-                    <Link href="/categories" className="hover:text-amber-600 transition">Categories</Link>
+                    <Link href="/categories" className="hover:text-amber-600 transition focus:underline">Categories</Link>
 
-                    <Link href="/profile" className="hover:text-amber-600 transition">Profile</Link>
+                    <Link href="/profile" className="hover:text-amber-600 transition focus:underline">Profile</Link>
 
                 </div>
 
                 {/* Authentication Buttons */}
                 <div className="flex gap-4">
 
-                    <Link href="/login" className="px-4 py-2 border border-amber-500 rounded-lg hover:bg-amber-50">Login</Link>
+                    <Link href="/login" className="px-4 py-2 border border-amber-500 rounded-lg hover:bg-amber-50 dark:bg-gray-800 dark:text-white">Login</Link>
 
                     <Link href="/register" className="px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600">Register</Link>
 
                 </div>
+
+                <ThemeToggle />
 
             </nav>
         </header>
