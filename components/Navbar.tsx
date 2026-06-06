@@ -1,20 +1,10 @@
 import Link from "next/link"
-import ThemeToggle from "./Toggle"
+
 
 export default function Navbar() {
   return (
     <>
-        <header className="
-sticky top-0
-z-50
-bg-white
-dark:bg-slate-900
-shadow-md
-dark:shadow-black/50
-border-b
-border-gray-200
-dark:border-slate-800
-">
+        <header className="sticky top-0 z-50 bg-white  shadow-md  border-b border-gray-200 ">
             <nav className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
 
                 <div>
@@ -39,13 +29,13 @@ dark:border-slate-800
                 {/* Authentication Buttons */}
                 <div className="flex gap-4">
 
-                    <Link href="/login" className="px-4 py-2 border border-amber-500 rounded-lg hover:bg-amber-50 dark:bg-gray-800 dark:text-white">Login</Link>
+                    <Link href="/login" className="px-4 py-2 border border-amber-500 rounded-lg hover:bg-amber-50  ">Login</Link>
 
                     <Link href="/register" className="px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600">Register</Link>
 
                 </div>
 
-                <ThemeToggle />
+
 
             </nav>
         </header>

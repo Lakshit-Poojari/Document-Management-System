@@ -1,8 +1,8 @@
 export default function Profile() {
     return(
-    <div className="min-h-screen bg-amber-50 dark:bg-gray-900 py-12 px-6">
+    <div className="min-h-screen bg-amber-50  py-12 px-6">
 
-      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-10">
+      <div className="max-w-4xl mx-auto bg-white  rounded-2xl shadow-xl p-10">
 
         <div className="flex flex-col items-center">
 
@@ -10,11 +10,11 @@ export default function Profile() {
             LP
           </div>
 
-          <h1 className="mt-6 text-4xl font-bold text-gray-800 dark:text-white">
+          <h1 className="mt-6 text-4xl font-bold text-gray-800 ">
             Lakshit Poojari
           </h1>
 
-          <p className="text-lg text-gray-500 dark:text-gray-300 mt-2">
+          <p className="text-lg text-gray-500  mt-2">
             Administrator
           </p>
 
@@ -22,9 +22,9 @@ export default function Profile() {
 
         <div className="grid md:grid-cols-2 gap-8 mt-12">
 
-          <div className="bg-amber-100 dark:bg-gray-700 rounded-xl p-6 shadow">
+          <div className="bg-amber-100  rounded-xl p-6 shadow">
 
-            <h2 className="text-xl font-semibold text-amber-700 dark:text-amber-400 mb-4">
+            <h2 className="text-xl font-semibold text-amber-700  mb-4">
               Personal Information
             </h2>
 
@@ -55,9 +55,9 @@ export default function Profile() {
 
           </div>
 
-          <div className="bg-amber-100 dark:bg-gray-700 rounded-xl p-6 shadow">
+          <div className="bg-amber-100  rounded-xl p-6 shadow">
 
-            <h2 className="text-xl font-semibold text-amber-700 dark:text-amber-400 mb-4">
+            <h2 className="text-xl font-semibold text-amber-700  mb-4">
               Account Summary
             </h2>
 
