@@ -6,36 +6,26 @@ export default function EditDocument() {
 
       <div className="max-w-3xl mx-auto bg-white  rounded-2xl shadow-xl p-8">
 
-        <h1 className="text-4xl font-bold text-amber-600  mb-2">
-          Edit Document
-        </h1>
+        <h1 className="text-4xl font-bold text-amber-600  mb-2">Edit Document</h1>
 
-        <p className="text-gray-600  mb-8">
-          Update the document details and upload a new file if needed.
-        </p>
+        <p className="text-gray-600  mb-8">Update the document details and upload a new file if needed.</p>
 
         <form className="space-y-6">
 
           <div>
             <label className="block text-lg font-medium mb-2">Title <span className="text-red-500">*</span></label>
 
-            <input type="text"
-              defaultValue="Employee Handbook"
+            <input type="text" defaultValue="Employee Handbook"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg
-              focus:outline-none focus:ring-2 focus:ring-amber-400"
-            />
+              focus:outline-none focus:ring-2 focus:ring-amber-400" />
           </div>
 
           <div>
-            <label className="block text-lg font-medium mb-2">
-              Description
-            </label>
+            <label className="block text-lg font-medium mb-2">Description</label>
 
-            <textarea rows={4}
-              defaultValue="Company policies and employee guidelines."
+            <textarea rows={4} defaultValue="Company policies and employee guidelines."
               className="w-full px-4 py-3 border border-gray-300 rounded-lg
-              resize-none focus:outline-none focus:ring-2 focus:ring-amber-400"
-            />
+              resize-none focus:outline-none focus:ring-2 focus:ring-amber-400" />
           </div>
 
           <div>
@@ -53,35 +43,22 @@ export default function EditDocument() {
           <div>
             <label className="block text-lg font-medium mb-2">Current File</label>
 
-            <div className="px-4 py-3 bg-gray-100 rounded-lg">employee-handbook.pdf
-            </div>
+            <div className="px-4 py-3 bg-gray-100 rounded-lg">employee-handbook.pdf</div>
           </div>
 
           <div>
-            <label className="block text-lg font-medium mb-2">
-              Replace File
-            </label>
+            <label className="block text-lg font-medium mb-2">Replace File</label>
 
-            <input
-              type="file"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-            />
+            <input type="file" className="w-full px-4 py-3 border border-gray-300 rounded-lg"/>
           </div>
 
           <div className="flex flex-wrap gap-4 pt-4">
 
-            <button
-              type="submit"
-              className="px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition"
-            >
+            <button type="submit" className="px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
               Update Document
             </button>
 
-            <button
-              type="reset"
-              className="px-6 py-3 border border-gray-300 rounded-lg
-              hover:bg-gray-100transition"
-            >
+            <button type="reset" className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-100transition">
               Reset
             </button>
 
