@@ -1,4 +1,5 @@
 import { Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 export default function Categories() {
   return (
@@ -18,9 +19,9 @@ export default function Categories() {
             </p>
           </div>
 
-          <button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
+          <Link href={"/categories/create"}><button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
             Add Category
-          </button>
+          </button></Link>
 
         </div>
 
