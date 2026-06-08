@@ -3,6 +3,7 @@ import {
   Pencil,
   Download,
   Trash2,
+  FolderOpen,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -58,21 +59,69 @@ export default function Document() {
                             <td className="px-4 py-3 border border-gray-300">
                                 <div className="flex gap-4">
 
-                                    <button className="text-blue-500 hover:text-blue-700">
-                                    <Eye size={18} />
-                                    </button>
+                                    <div className="relative group">
+                                        <Link href={"/document/1"}>        
+                                            <button className="p-2 rounded-lg text-blue-500 hover:bg-blue-100 hover:text-blue-700 transition">
+                                                <Eye size={18} />
+                                            </button>
+                                        </Link>
 
-                                    <button className="text-yellow-500 hover:text-yellow-700">
-                                    <Pencil size={18} />
-                                    </button>
+                                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap
+                                        bg-blue-600 text-white text-xs px-3 py-1 rounded-md
+                                        opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none">
+                                        View Details
+                                        </span>
+                                    </div>
 
-                                    <button className="text-green-500 hover:text-green-700">
-                                    <Download size={18} />
-                                    </button>
+                                    <div className="relative group">
+                                        <button className="p-2 rounded-lg text-purple-500 hover:bg-purple-100 hover:text-purple-700 transition">
+                                            <FolderOpen size={18} />
+                                        </button>
 
-                                    <button className="text-red-500 hover:text-red-700">
-                                    <Trash2 size={18} />
-                                    </button>
+                                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap
+                                        bg-purple-600 text-white text-xs px-3 py-1 rounded-md
+                                        opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none">
+                                        Open Document
+                                        </span>
+                                    </div>
+
+                                    <div className="relative group">
+                                        
+                                        <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100 hover:text-amber-700 transition">
+                                            <Pencil size={18} />
+                                        </button>
+                                        
+
+                                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap
+                                        bg-amber-500 text-white text-xs px-3 py-1 rounded-md
+                                        opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none">
+                                        Edit
+                                        </span>
+                                    </div>
+
+                                    <div className="relative group">
+                                        <button className="p-2 rounded-lg text-green-500 hover:bg-green-100 hover:text-green-700 transition">
+                                            <Download size={18} />
+                                        </button>
+
+                                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap
+                                        bg-green-600 text-white text-xs px-3 py-1 rounded-md
+                                        opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none">
+                                        Download
+                                        </span>
+                                    </div>
+
+                                    <div className="relative group">
+                                        <button className="p-2 rounded-lg text-red-500 hover:bg-red-100 hover:text-red-700 transition">
+                                            <Trash2 size={18} />
+                                        </button>
+
+                                        <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap
+                                        bg-red-600 text-white text-xs px-3 py-1 rounded-md
+                                        opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none">
+                                        Delete
+                                        </span>
+                                    </div>
 
                                 </div>
                             </td>
