@@ -31,8 +31,7 @@ export default function EditDocument() {
           <div>
             <label className="block text-lg font-medium mb-2"> Category <span className="text-red-500">*</span></label>
 
-            <select defaultValue="HR"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg
+            <select defaultValue="HR" className="w-full px-4 py-3 border border-gray-300 rounded-lg
               focus:outline-none focus:ring-2 focus:ring-amber-400">
               <option>HR</option>
               <option>Finance</option>
