@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CreateCategory() {
   return (
     <div className="min-h-screen bg-amber-50 py-10 px-6">
@@ -42,9 +44,11 @@ export default function CreateCategory() {
 
             <button type="reset" className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-100 transition" >Reset</button>
 
-            <button type="button" className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition">
-              Cancel
-            </button>
+            <Link href={"/categories"}>
+                <button type="button" className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition">
+                Back
+                </button>
+            </Link>
 
           </div>
 

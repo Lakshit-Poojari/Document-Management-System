@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function EditDocument() {
@@ -5,11 +6,20 @@ export default function EditDocument() {
     <div className="min-h-screen bg-amber-50  py-10 px-6">
 
       <div className="max-w-3xl mx-auto bg-white  rounded-2xl shadow-xl p-8">
+        <div className="flex justify-between items-center mb-8">
+        <div>
 
         <h1 className="text-4xl font-bold text-amber-600  mb-2">Edit Document</h1>
 
         <p className="text-gray-600  mb-8">Update the document details and upload a new file if needed.</p>
 
+        </div>
+
+        <Link href={"/document"} className="flex items-center gap-2 px-4 py-2 transition text-gray-600 ">
+            <ArrowLeft size={18} />
+            Back
+          </Link>
+    </div>
         <form className="space-y-6">
 
           <div>
