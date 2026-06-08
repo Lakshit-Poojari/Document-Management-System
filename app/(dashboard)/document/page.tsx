@@ -87,9 +87,11 @@ export default function Document() {
 
                                     <div className="relative group">
                                         
-                                        <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100 hover:text-amber-700 transition">
-                                            <Pencil size={18} />
-                                        </button>
+                                        <Link href={"/document/1/edit"}>
+                                            <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100 hover:text-amber-700 transition">
+                                                <Pencil size={18} />
+                                            </button>
+                                        </Link>
                                         
 
                                         <span className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap

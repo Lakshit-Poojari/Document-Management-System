@@ -119,10 +119,12 @@ export default function DocumentDetails() {
             Download
           </button>
 
-          <button className="flex items-center gap-2 px-5 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
-            <Pencil size={18} />
-            Edit
-          </button>
+          <Link href={"/document/1/edit"}>
+            <button className="flex items-center gap-2 px-5 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
+                <Pencil size={18} />
+                Edit
+            </button>
+          </Link>
 
           <button className="flex items-center gap-2 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600">
             <Trash2 size={18} />
