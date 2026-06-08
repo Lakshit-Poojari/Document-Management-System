@@ -4,6 +4,7 @@ import {
   Download,
   Trash2,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function Document() {
     return(
@@ -26,9 +27,9 @@ export default function Document() {
                 placeholder="Search document..."
             />
 
-            <button>
+            <Link href={"/document/create"}><button>
                 Upload Document
-            </button>
+            </button></Link>
 
             </div>
 
