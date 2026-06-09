@@ -14,49 +14,48 @@ export default function Document() {
         <div className="max-w-7xl mx-auto">
 
             <h1 className="text-5xl font-bold text-amber-600">
-            Documents
+                Documents
             </h1>
 
             <p className="text-gray-600  mt-2">
-            Manage and organize your documents securely.
+                Manage and organize your documents securely.
             </p>
 
             <div className="flex justify-between mt-8">
 
-            <input
-                type="text"
-                placeholder="Search document..."
-            />
+            <input  type="text" placeholder="Search document..." className="border border-gray-300 rounded-lg"/>
 
-            <Link href={"/document/create"}><button>
-                Upload Document
-            </button></Link>
+            <Link href={"/document/create"}>
+                <button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
+                    Upload Document
+                </button>
+            </Link>
 
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-gray-300 shadow-lg">
+            <div className="overflow-hidden rounded-2xl  border-gray-300 shadow-lg pt-6">
 
                 <table className="w-full">
 
                     <thead className="bg-amber-100">
                         <tr>
-                            <th className="px-4 py-3 border border-gray-300 text-left">Title</th>
-                            <th className="px-4 py-3 border border-gray-300 text-left">Category</th>
-                            <th className="px-4 py-3 border border-gray-300 text-left">Size</th>
-                            <th className="px-4 py-3 border border-gray-300 text-left">Date</th>
-                            <th className="px-4 py-3 border border-gray-300 text-left">Actions</th>
+                            <th className="px-4 py-3  border-gray-300 text-left">Title</th>
+                            <th className="px-4 py-3  border-gray-300 text-left">Category</th>
+                            <th className="px-4 py-3  border-gray-300 text-left">Size</th>
+                            <th className="px-4 py-3  border-gray-300 text-left">Date</th>
+                            <th className="px-4 py-3  border-gray-300 text-left">Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         
                         <tr className="hover:bg-amber-50 transition">
-                            <td className="px-4 py-3 border border-gray-300">Resume.pdf</td>
-                            <td className="px-4 py-3 border border-gray-300">HR</td>
-                            <td className="px-4 py-3 border border-gray-300">2 MB</td>
-                            <td className="px-4 py-3 border border-gray-300">06-Jun-2026</td>
+                            <td className="px-4 py-3  border-gray-300">Resume.pdf</td>
+                            <td className="px-4 py-3  border-gray-300">HR</td>
+                            <td className="px-4 py-3  border-gray-300">2 MB</td>
+                            <td className="px-4 py-3  border-gray-300">06-Jun-2026</td>
 
-                            <td className="px-4 py-3 border border-gray-300">
+                            <td className="px-4 py-3  border-gray-300">
                                 <div className="flex gap-4">
 
                                     <div className="relative group">

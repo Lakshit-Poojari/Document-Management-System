@@ -7,17 +7,14 @@ import { useEffect, useState } from "react";
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
 
+  async function checkAuth() {
+    const response = await fetch("/api/users/me", { credentials: "include" });
+        setLoggedIn(response.ok);
+        }
+
   useEffect(() => {
         checkAuth();
         }, []);
-
-        async function checkAuth() {
-        const response = await fetch("/api/users/me", {
-            credentials: "include",
-        });
-
-        setLoggedIn(response.ok);
-        }
 
   const logout = async () => {
     await fetch("/api/users/logout", {

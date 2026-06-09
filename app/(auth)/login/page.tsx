@@ -35,6 +35,7 @@ export default function Login () {
 
                 router.push("/document");
                 router.refresh();
+                window.location.href = "/document";
             } else {
             setmessage(data.message || "Invalid email or password");
             }

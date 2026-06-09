@@ -15,7 +15,9 @@ export default function Categories() {
             <p className="text-gray-600 mt-2">Organize and manage document categories.</p>
           </div>
 
-          <Link href={"/categories/create"}><button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
+          <Link href={"/categories/create"}>
+          <button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
+
             Add Category
           </button></Link>
 
@@ -57,12 +59,12 @@ export default function Categories() {
                   <div className="flex gap-4">
 
                     <Link href={"/categories/1/edit"}>
-                      <button className="text-yellow-500 hover:text-yellow-700">
+                      <button className="text-amber-500 p-2 rounded-lg hover:bg-amber-100 hover:text-amber-700">
                         <Pencil size={18} />
                       </button>
                     </Link>
 
-                    <button className="text-red-500 hover:text-red-700">
+                    <button className="text-red-500 p-2 rounded-lg hover:bg-red-100 hover:text-red-700">
                       <Trash2 size={18} />
                     </button>
 
