@@ -21,6 +21,7 @@ export default function Login () {
             const response = await fetch("http://localhost:3000/api/users/login", 
                 { 
                     method: "POST", 
+                    credentials: "include",
                     headers: { "Content-Type": "application/json",},
                     body: JSON.stringify(form),
                 }
@@ -28,14 +29,12 @@ export default function Login () {
 
             const data = await response.json();
 
-            localStorage.setItem("token", data.token);
-
             if (response.ok) {
+
                 setmessage("Login successful!");
 
-                // Redirect after successful login
                 router.push("/document");
-                // or router.push("/dashboard");
+                router.refresh();
             } else {
             setmessage(data.message || "Invalid email or password");
             }
