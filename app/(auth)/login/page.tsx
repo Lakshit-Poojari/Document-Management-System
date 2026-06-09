@@ -5,8 +5,8 @@ import Link from "next/link"
 export default function login () {
     return(
         <>
-            <div className="min-h-screen flex items-center justify-center ">
-                <div className="w-80 max-w-md p-8 rounded-2xl shadow-2xl bg-amber-50">
+            <div className="min-h-screen flex items-center justify-center bg-amber-50">
+                <div className="w-80 max-w-md p-8 rounded-2xl shadow-2xl bg-white">
                     <p className="text-3xl text-amber-300 font-bold text-center mb-6">Login</p>
                 <form>
                     <label>Email</label>
