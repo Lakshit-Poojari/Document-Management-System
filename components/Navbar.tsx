@@ -37,10 +37,10 @@ export default function Navbar() {
         </Link>
 
         <div className="flex gap-8">
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/document">Documents</Link>
-          <Link href="/categories">Categories</Link>
+          <Link href="/" className=" hover:text-amber-600 focus:text-amber-600">Home</Link>
+          <Link href="/about" className=" hover:text-amber-600 focus:text-amber-600">About</Link>
+          <Link href="/document" className=" hover:text-amber-600 focus:text-amber-600">Documents</Link>
+          <Link href="/categories" className=" hover:text-amber-600 focus:text-amber-600">Categories</Link>
         </div>
 
         {loggedIn ? (
