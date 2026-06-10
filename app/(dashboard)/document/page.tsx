@@ -10,6 +10,7 @@ type Document = {
   category_name: string;
   file_size: string;
   created_at: string;
+  file_path: string;
 };
 
 export default function Document() {
@@ -41,31 +42,45 @@ export default function Document() {
   );
 
   const handleDelete = async (id: number) => {
-  const confirmDelete = confirm(
-    "Are you sure you want to delete this document?"
-  );
+    const confirmDelete = confirm(
+      "Are you sure you want to delete this document?"
+    );
 
-  if (!confirmDelete) return;
+    if (!confirmDelete) return;
 
-  try {
-    const response = await fetch(`/api/documents/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
+    try {
+      const response = await fetch(`/api/documents/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      alert(data.message);
+      if (response.ok) {
+        alert(data.message);
 
-      fetchDocuments(); // refresh list
-    } else {
-      alert(data.message);
+        fetchDocuments(); // refresh list
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
+
+  const handleDownload = (filePath: string) => {
+    const link = document.createElement("a");
+
+    link.href = filePath;
+
+    link.download = "";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="min-h-screen bg-amber-50">
@@ -164,10 +179,13 @@ export default function Document() {
                           <Eye size={18} />
                         </button>
                       </Link>
+                      <a  href={doc.file_path} target="_blank" rel="noopener noreferrer" >
 
-                      <button className="p-2 rounded-lg text-purple-500 hover:bg-purple-100">
-                        <FolderOpen size={18} />
-                      </button>
+                        <button className="p-2 rounded-lg text-purple-500 hover:bg-purple-100">
+                          <FolderOpen size={18} />
+                        </button>
+
+                      </a>
 
                       <Link href={`/document/${doc.document_id}/edit`}>
                         <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100">
@@ -175,7 +193,7 @@ export default function Document() {
                         </button>
                       </Link>
 
-                      <button className="p-2 rounded-lg text-green-500 hover:bg-green-100">
+                      <button className="p-2 rounded-lg text-green-500 hover:bg-green-100" onClick={() => handleDownload(doc.file_path)}>
                         <Download size={18} />
                       </button>
 
