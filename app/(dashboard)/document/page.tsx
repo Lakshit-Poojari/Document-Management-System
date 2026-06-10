@@ -40,6 +40,33 @@ export default function Document() {
     doc.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleDelete = async (id: number) => {
+  const confirmDelete = confirm(
+    "Are you sure you want to delete this document?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const response = await fetch(`/api/documents/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message);
+
+      fetchDocuments(); // refresh list
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   return (
     <div className="min-h-screen bg-amber-50">
 
@@ -152,9 +179,7 @@ export default function Document() {
                         <Download size={18} />
                       </button>
 
-                      <button
-                        className="p-2 rounded-lg text-red-500 hover:bg-red-100"
-                      >
+                      <button className="p-2 rounded-lg text-red-500 hover:bg-red-100" onClick={() => handleDelete(doc.document_id)}>
                         <Trash2 size={18} />
                       </button>
 
