@@ -101,3 +101,7 @@ export default function Register () {
 }
 
 // Suchit@1234
+// suchit@gmail.com
+
+// "email": "lakshit@gmail.com",
+//   "password": "123456",
