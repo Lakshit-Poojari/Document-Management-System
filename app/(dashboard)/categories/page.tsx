@@ -26,7 +26,7 @@ export default function Categories() {
       });
 
       const data = await response.json();
-      console.log(data );
+      console.log(data);
       // Change this according to your API response
       setCategories(data);
     } catch (error) {
