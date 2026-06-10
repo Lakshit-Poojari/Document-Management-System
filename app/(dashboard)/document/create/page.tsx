@@ -43,9 +43,14 @@ export default function CreateDocument() {
     });
   }
 
-  const handleFileChange = async(e:React.ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement >)=>{
-
-  }
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setForm({
+        ...form,
+        file: e.target.files[0],
+      });
+    }
+  };
 
   const handleSubmit = async ( e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
