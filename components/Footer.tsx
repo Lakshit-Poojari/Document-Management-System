@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() { 
     return ( 
         <>
@@ -15,11 +17,9 @@ export default function Footer() {
                     {/* Navigation */} 
                     <div> 
                         <ul className="flex flex-wrap justify-center gap-8 text-lg"> 
-                            <li> <a href="/" className="hover:text-amber-400 transition duration-300" > Home </a> </li> 
-                            <li> <a href="/about" className="hover:text-amber-400 transition duration-300" > About </a> </li> 
-                            <li> <a href="/login" className="hover:text-amber-400 transition duration-300" > Login </a> </li> 
-                            <li> <a href="/register" className="hover:text-amber-400 transition duration-300" > Register </a> </li> 
-                            <li> <a href="/dashboard" className="hover:text-amber-400 transition duration-300" > Dashboard </a> </li> 
+                            <li> <Link href={"/"} className="hover:text-amber-400 transition duration-300" > Home </Link> </li> 
+                            <li> <Link href={"/about"} className="hover:text-amber-400 transition duration-300" > About </Link> </li>  
+                            <li> <Link href={"/document"} className="hover:text-amber-400 transition duration-300" > Document </Link> </li> 
                         </ul> 
                     </div> 
                 </div> 
