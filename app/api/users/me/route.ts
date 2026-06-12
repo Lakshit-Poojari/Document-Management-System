@@ -10,23 +10,14 @@ export async function GET() {
   console.log("Token:", token);
 
   if (!token) {
-    return NextResponse.json(
-      { message: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ message: "Unauthorized" },{ status: 401 });
   }
 
   try {
     const user = verifyToken(token);
 
-    return NextResponse.json({
-  success: true,
-  user,
-});
+    return NextResponse.json({ success: true, user,});
   } catch {
-    return NextResponse.json(
-      { message: "Invalid token" },
-      { status: 401 }
-    );
+    return NextResponse.json( { message: "Invalid token" },{ status: 401 } );
   }
 }
