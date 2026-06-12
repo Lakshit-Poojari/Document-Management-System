@@ -39,7 +39,7 @@ export default function CreateDocument() {
   const handleChange = async (e:React.ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement >) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trimStart(),
     });
   }
 
@@ -58,8 +58,20 @@ export default function CreateDocument() {
     try {
       const formData = new FormData();
 
-      formData.append("title", form.title);
-      formData.append("description", form.description);
+      formData.append(
+        "title",
+        form.title
+          .trim()
+          .replace(/\s+/g, " ")
+          .toLowerCase()
+          .replace(/\b\w/g, (char) => char.toUpperCase())
+      );
+
+      formData.append(
+        "description",
+        form.description.trim()
+      );
+
       formData.append("category_id", form.category_id);
 
       if (form.file) {
@@ -67,19 +79,18 @@ export default function CreateDocument() {
       }
 
       const response = await fetch("/api/documents", {
-          method: "POST",
-          credentials: "include",
-          body: formData,
-        });
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      });
 
       const data = await response.json();
 
       if (response.ok) {
         setmessage("Document uploaded successfully.");
-
         router.push("/document");
       } else {
-        setmessage(data.message);
+        setmessage(data.message || "Upload failed");
       }
     } catch (error) {
       console.error(error);

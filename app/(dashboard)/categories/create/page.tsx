@@ -17,12 +17,22 @@ export default function CreateCategory() {
   const handleChange = ( e: React.ChangeEvent< HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trimStart(),
     });
   };
 
   const handleSubmit = async ( e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const body = {
+      category_name: form.category_name
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase()
+        .replace(/\b\w/g, (char) => char.toUpperCase()),
+
+      description: form.description.trim(),
+    };
 
     try {
       const response = await fetch("/api/categories", {
@@ -31,7 +41,7 @@ export default function CreateCategory() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(body),
       });
 
       const data = await response.json();

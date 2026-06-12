@@ -54,7 +54,7 @@ export default function EditDocument() {
   const handleChange = (e: React.ChangeEvent< HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement >) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trimStart(),
     });
   };
 
@@ -72,28 +72,44 @@ export default function EditDocument() {
 
     const formData = new FormData();
 
-    formData.append("title", form.title);
-    formData.append("description", form.description);
+    formData.append(
+      "title",
+      form.title
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase()
+        .replace(/\b\w/g, (char) => char.toUpperCase())
+    );
+
+    formData.append(
+      "description",
+      form.description.trim()
+    );
+
     formData.append("category_id", form.category_id);
 
     if (form.file) {
       formData.append("file", form.file);
     }
 
-    const response = await fetch(`/api/documents/${id}`, {
-      method: "PUT",
-      credentials: "include",
-      body: formData,
-    });
+    try {
+      const response = await fetch(`/api/documents/${id}`, {
+        method: "PUT",
+        credentials: "include",
+        body: formData,
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      alert("Document updated successfully");
-
-      router.push("/document");
-    } else {
-      alert(data.message);
+      if (response.ok) {
+        alert("Document updated successfully");
+        router.push("/document");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
     }
   };
 

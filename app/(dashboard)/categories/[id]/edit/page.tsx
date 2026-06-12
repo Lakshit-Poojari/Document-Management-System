@@ -38,15 +38,25 @@ export default function EditCategory() {
     }
   };
 
-  const handleChange = ( e: React.ChangeEvent< HTMLInputElement | HTMLTextAreaElement >) => {
+  const handleChange = (e: React.ChangeEvent< HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trimStart(),
     });
   };
 
-  const handleSubmit = async ( e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const body = {
+      category_name: form.category_name
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase()
+        .replace(/\b\w/g, (char) => char.toUpperCase()),
+
+      description: form.description.trim(),
+    };
 
     try {
       const response = await fetch(`/api/categories/${id}`, {
@@ -55,14 +65,13 @@ export default function EditCategory() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(body),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         alert("Category updated successfully");
-
         router.push("/categories");
       } else {
         setMessage(data.message);
