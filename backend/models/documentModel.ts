@@ -55,14 +55,33 @@ export async function getSingleDocumentModel(documentId: number) {
 }
 
 export async function getAllDocumentModel() {
-    try {
-        const [result] =await db.execute("SELECT * FROM documents ORDER BY document_id DESC")
+  try {
+    const [result] = await db.execute(`
+      SELECT
+        d.document_id,
+        d.title,
+        d.description,
+        d.file_name,
+        d.file_path,
+        d.file_type,
+        d.file_size,
+        d.created_at,
+        d.uploaded_by,
+        c.category_name,
+        u.full_name AS uploaded_by_name
+      FROM documents d
+      LEFT JOIN categories c
+        ON d.category_id = c.category_id
+      LEFT JOIN users u
+        ON d.uploaded_by = u.user_id
+      ORDER BY d.document_id DESC
+    `);
 
-        return result
-    } catch (error) {
-        console.error("Error creating document(model):", error);
-        throw error;
-    }
+    return result;
+  } catch (error) {
+    console.error("Error fetching documents:", error);
+    throw error;
+  }
 }
 
 export async function updateDocumentModel(documentId: number, document: CreateDocument) {

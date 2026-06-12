@@ -20,6 +20,7 @@ type Document = {
   file_type: string;
   file_size: number;
   file_path: string;
+  uploaded_by: number;
   uploaded_by_name: string;
   created_at: string;
 };
@@ -30,8 +31,30 @@ export default function DocumentDetails() {
 
   const [doc, setDoc] = useState<Document | null>(null);
 
+  const [user, setUser] = useState<{
+      user_id: number;
+      role: string;
+    } | null>(null);
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch("/api/users/me", {
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setUser(data.user);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchDocument();
+    fetchUser();
   }, []);
 
   const fetchDocument = async () => {
@@ -161,23 +184,28 @@ export default function DocumentDetails() {
         <div className="flex gap-4 mt-10">
 
           <button onClick={() => handleDownload(doc.file_path)}
-            className="flex items-center gap-2 px-5 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600" >
+            className="flex items-center gap-2 px-5 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600">
             <Download size={18} />
             Download
           </button>
 
-          <Link href={`/document/${doc.document_id}/edit`}>
-            <button className="flex items-center gap-2 px-5 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
-              <Pencil size={18} />
-              Edit
-            </button>
-          </Link>
+          {(user?.role === "ADMIN" || user?.user_id === doc.uploaded_by) && (
+            <>
+              <Link href={`/document/${doc.document_id}/edit`}>
+                <button className="flex items-center gap-2 px-5 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">
+                  <Pencil size={18} />
+                  Edit
+                </button>
+              </Link>
 
-          <button onClick={handleDelete}
-            className="flex items-center gap-2 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600">
-            <Trash2 size={18} />
-            Delete
-          </button>
+              <button onClick={handleDelete}
+                className="flex items-center gap-2 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                <Trash2 size={18} />
+                Delete
+              </button>
+            </>
+          )}
 
         </div>
 
