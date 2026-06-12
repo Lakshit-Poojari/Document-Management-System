@@ -17,7 +17,8 @@ type Document = {
 export default function Document() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [search, setSearch] = useState("");
-  const [user, setUser] = useState<{user_id: number;
+  const [user, setUser] = useState<{
+    user_id: number;
     role: string;
   } | null>(null);
 
@@ -88,20 +89,20 @@ export default function Document() {
   };
 
   const fetchUser = async () => {
-  try {
-    const response = await fetch("/api/users/me", {
-      credentials: "include",
-    });
+    try {
+      const response = await fetch("/api/users/me", {
+        credentials: "include",
+      });
 
-    if (response.ok) {
-      const data = await response.json();
+      if (response.ok) {
+        const data = await response.json();
 
-      setUser(data.user);
+        setUser(data.user);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-amber-50">
@@ -118,13 +119,8 @@ export default function Document() {
 
         <div className="flex justify-between mt-8">
 
-          <input
-            type="text"
-            placeholder="Search document..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-2 w-80"
-          />
+          <input type="text" placeholder="Search document..." value={search} onChange={(e) => setSearch(e.target.value)}
+            className="border border-gray-300 rounded-lg px-4 py-2 w-80" />
 
           <Link href="/document/create">
             <button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600">
@@ -168,88 +164,86 @@ export default function Document() {
 
             <tbody>
 
-              {filteredDocuments.map((doc) => (
+              {
+                filteredDocuments.map((doc) => (
 
-                <tr
-                  key={doc.document_id}
-                  className="hover:bg-amber-50 transition"
-                >
+                  <tr key={doc.document_id} className="hover:bg-amber-50 transition">
 
-                  <td className="px-4 py-3">
-                    {doc.title}
-                  </td>
+                    <td className="px-4 py-3">
+                      {doc.title}
+                    </td>
 
-                  <td className="px-4 py-3">
-                    {doc.category_name}
-                  </td>
+                    <td className="px-4 py-3">
+                      {doc.category_name}
+                    </td>
 
-                  <td className="px-4 py-3">
-                    {doc.file_size}
-                  </td>
+                    <td className="px-4 py-3">
+                      {doc.file_size}
+                    </td>
 
-                  <td className="px-4 py-3">
-                    {new Date(doc.created_at).toLocaleDateString("en-IN")}
-                  </td>
+                    <td className="px-4 py-3">
+                      {new Date(doc.created_at).toLocaleDateString("en-IN")}
+                    </td>
 
-                  <td className="px-4 py-3">
+                    <td className="px-4 py-3">
 
-                    <div className="flex gap-4">
+                      <div className="flex gap-4">
 
-                      <Link href={`/document/${doc.document_id}`}>
-                        <button className="p-2 rounded-lg text-blue-500 hover:bg-blue-100">
-                          <Eye size={18} />
+                        <Link href={`/document/${doc.document_id}`}>
+                          <button className="p-2 rounded-lg text-blue-500 hover:bg-blue-100">
+                            <Eye size={18} />
+                          </button>
+                        </Link>
+                        <a  href={doc.file_path} target="_blank" rel="noopener noreferrer" >
+
+                          <button className="p-2 rounded-lg text-purple-500 hover:bg-purple-100">
+                            <FolderOpen size={18} />
+                          </button>
+
+                        </a>
+
+                        <button className="p-2 rounded-lg text-green-500 hover:bg-green-100" onClick={() => handleDownload(doc.file_path)}>
+                          <Download size={18} />
                         </button>
-                      </Link>
-                      <a  href={doc.file_path} target="_blank" rel="noopener noreferrer" >
 
-                        <button className="p-2 rounded-lg text-purple-500 hover:bg-purple-100">
-                          <FolderOpen size={18} />
-                        </button>
+                        {
+                          (user?.role === "ADMIN" || user?.user_id === doc.uploaded_by) && (
+                            <>
+                              <Link href={`/document/${doc.document_id}/edit`}>
+                                <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100 hover:text-amber-700">
+                                  <Pencil size={18} />
+                                </button>
+                              </Link>
 
-                      </a>
-
-                      <button className="p-2 rounded-lg text-green-500 hover:bg-green-100" onClick={() => handleDownload(doc.file_path)}>
-                        <Download size={18} />
-                      </button>
-
-                      {
-                        (user?.role === "ADMIN" || user?.user_id === doc.uploaded_by) && (
-                          <>
-                            <Link href={`/document/${doc.document_id}/edit`}>
-                              <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100 hover:text-amber-700">
-                                <Pencil size={18} />
+                              <button onClick={() => handleDelete(doc.document_id)}  className="p-2 rounded-lg text-red-500 hover:bg-red-100 hover:text-red-700">
+                                <Trash2 size={18} />
                               </button>
-                            </Link>
+                            </>
+                          )
+                        }
 
-                            <button onClick={() => handleDelete(doc.document_id)}  className="p-2 rounded-lg text-red-500 hover:bg-red-100 hover:text-red-700">
-                              <Trash2 size={18} />
-                            </button>
-                          </>
-                        )
-                      }
+                      </div>
 
-                    </div>
+                    </td>
 
-                  </td>
+                  </tr>
 
-                </tr>
+                ))
+              }
 
-              ))}
+              {
+                filteredDocuments.length === 0 && (
 
-              {filteredDocuments.length === 0 && (
+                  <tr>
 
-                <tr>
+                    <td colSpan={5} className="text-center py-8 text-gray-500">
+                      No documents found.
+                    </td>
 
-                  <td
-                    colSpan={5}
-                    className="text-center py-8 text-gray-500"
-                  >
-                    No documents found.
-                  </td>
+                  </tr>
 
-                </tr>
-
-              )}
+                )
+              }
 
             </tbody>
 

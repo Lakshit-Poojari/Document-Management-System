@@ -112,9 +112,9 @@ export default function EditDocument() {
         </div>
 
         <Link href={"/document"} className="flex items-center gap-2 px-4 py-2 transition text-gray-600 ">
-            <ArrowLeft size={18} />
-            Back
-          </Link>
+          <ArrowLeft size={18} />
+          Back
+        </Link>
     </div>
         <form onSubmit={handleSubmit} className="space-y-6">
 

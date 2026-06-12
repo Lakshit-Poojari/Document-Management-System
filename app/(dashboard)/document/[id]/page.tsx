@@ -199,8 +199,7 @@ export default function DocumentDetails() {
               </Link>
 
               <button onClick={handleDelete}
-                className="flex items-center gap-2 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600"
-              >
+                className="flex items-center gap-2 px-5 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600">
                 <Trash2 size={18} />
                 Delete
               </button>

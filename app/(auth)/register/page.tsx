@@ -18,40 +18,56 @@ export default function Register () {
 
     const router = useRouter()
 
-    const handleSubmit = async(e: React.FormEvent) => {
-        
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const body = {
+            full_name: form.full_name
+            .trim()
+            .replace(/\s+/g, " ")
+            .toLowerCase()
+            .replace(/\b\w/g, (char) => char.toUpperCase()),
+
+            email: form.email.trim().toLowerCase(),
+
+            password_hash: form.password_hash,
+
+            role: form.role,
+        };
+
         try {
-                const response = await fetch("http://localhost:3000/api/users/register", 
-                    { 
-                        method: "POST", 
-                        headers: { "Content-Type": "application/json",},
-                        body: JSON.stringify(form),
-                    }
-                );
+            const response = await fetch("/api/users/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+            });
 
-                const data = await response.json()
+            const data = await response.json();
 
-                if (response.ok) {
-                    setmessage("Registration successful!");
+            if (response.ok) {
+            setmessage("Registration successful!");
 
-                    setTimeout(() => {
-                        router.push("/login");
-                    }, 1500);
-                }else {
-                    setmessage(data.message || "Registration failed");
-
-                }
+            setTimeout(() => {
+                router.push("/login");
+            }, 1500);
+            } else {
+            setmessage(data.message || "Registration failed");
+            }
         } catch (error) {
             console.error(error);
             setmessage("Something went wrong");
         }
-    }
+        };
 
-    const handleChange = (e: React.ChangeEvent <HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setform({
             ...form,
-            [e.target.name]: e.target.value,
+            [e.target.name]:
+            e.target.name === "email"
+                ? e.target.value.trimStart().toLowerCase()
+                : e.target.value,
         });
     };
 

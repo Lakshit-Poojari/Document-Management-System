@@ -18,14 +18,20 @@ export default function Login () {
     const handleSubmit = async(e:React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch("/api/users/login", 
-                { 
-                    method: "POST", 
-                    credentials: "include",
-                    headers: { "Content-Type": "application/json",},
-                    body: JSON.stringify(form),
-                }
-            )
+
+            const body = {
+                email: form.email.trim().toLowerCase(),
+                password_hash: form.password_hash,
+            };
+
+            const response = await fetch("/api/users/login", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
 
             const data = await response.json();
 
@@ -33,8 +39,6 @@ export default function Login () {
 
                 setmessage("Login successful!");
 
-                router.push("/document");
-                router.refresh();
                 window.location.href = "/document";
             } else {
             setmessage(data.message || "Invalid email or password");

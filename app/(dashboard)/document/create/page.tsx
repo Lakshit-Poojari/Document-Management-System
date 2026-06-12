@@ -123,11 +123,13 @@ export default function CreateDocument() {
 
                     <option value="">Select Category</option>
 
-                    {categories.map((category) => (
-                      <option key={category.category_id} value={category.category_id} >
-                        {category.category_name}
-                      </option>
-                    ))}
+                    {
+                      categories.map((category) => (
+                        <option key={category.category_id} value={category.category_id} >
+                          {category.category_name}
+                        </option>
+                      ))
+                    }
 
             </select>
           </div>

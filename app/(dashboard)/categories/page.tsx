@@ -110,13 +110,8 @@ export default function Categories() {
 
         <div className="mb-6">
 
-          <input
-            type="text"
-            placeholder="Search Category..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full md:w-96 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
-          />
+          <input type="text" placeholder="Search Category..." value={search} onChange={(e) => setSearch(e.target.value)}
+            className="w-full md:w-96 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400" />
 
         </div>
 
@@ -138,11 +133,12 @@ export default function Categories() {
                 <th className="px-4 py-4 text-left">
                   Documents
                 </th>
+
                 {user?.role === "ADMIN" && (
 
-                <th className="px-4 py-4 text-left">
-                  Actions
-                </th>
+                  <th className="px-4 py-4 text-left">
+                    Actions
+                  </th>
                  )}
               </tr>
 
@@ -150,60 +146,55 @@ export default function Categories() {
 
             <tbody>
 
-              {filteredCategories.length > 0 ? (
-                filteredCategories.map((category) => (
+              {
+                filteredCategories.length > 0 ? (
+                  filteredCategories.map((category) => (
 
-                  <tr key={category.category_id} className="border-t hover:bg-amber-50"
-                  >
+                    <tr key={category.category_id} className="border-t hover:bg-amber-50" >
 
-                    <td className="px-4 py-4">
-                      {category.category_name}
+                      <td className="px-4 py-4">
+                        {category.category_name}
+                      </td>
+
+                      <td className="px-4 py-4">
+                        {category.description}
+                      </td>
+
+                      <td className="px-4 py-4">
+                        {category.total_documents}
+                      </td>
+
+                      {
+                        user?.role === "ADMIN" && (
+                          <td className="px-4 py-4">
+                            <div className="flex gap-4">
+
+                              <Link href={`/categories/${category.category_id}/edit`}>
+                                <button className="text-amber-500 p-2 rounded-lg hover:bg-amber-100">
+                                  <Pencil size={18} />
+                                </button>
+                              </Link>
+
+                              <button onClick={() => handleDelete(category.category_id)} className="text-red-500 p-2 rounded-lg hover:bg-red-100" >
+                                <Trash2 size={18} />
+                              </button>
+
+                            </div>
+                          </td>
+                        )
+                      }
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+
+                    <td colSpan={4}  className="text-center py-8 text-gray-500" >
+                      No Categories Found
                     </td>
-
-                    <td className="px-4 py-4">
-                      {category.description}
-                    </td>
-
-                    <td className="px-4 py-4">
-                      {category.total_documents}
-                    </td>
-
-                    {user?.role === "ADMIN" && (
-  <td className="px-4 py-4">
-    <div className="flex gap-4">
-
-      <Link href={`/categories/${category.category_id}/edit`}>
-        <button className="text-amber-500 p-2 rounded-lg hover:bg-amber-100">
-          <Pencil size={18} />
-        </button>
-      </Link>
-
-      <button
-        onClick={() => handleDelete(category.category_id)}
-        className="text-red-500 p-2 rounded-lg hover:bg-red-100"
-      >
-        <Trash2 size={18} />
-      </button>
-
-    </div>
-  </td>
-)}
 
                   </tr>
-
-                ))
-              ) : (
-                <tr>
-
-                  <td
-                    colSpan={4}
-                    className="text-center py-8 text-gray-500"
-                  >
-                    No Categories Found
-                  </td>
-
-                </tr>
-              )}
+                )
+              }
 
             </tbody>
 
