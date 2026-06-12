@@ -116,12 +116,9 @@ export default function Profile() {
 
             <div className="space-y-3">
 
-              <p>
-                📄 Documents Uploaded: <strong>25</strong>
-              </p>
 
               <p>
-                📁 Categories Created: <strong></strong>
+                <span className="font-semibold">Role:</span> {user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()}
               </p>
 
               <p>
