@@ -22,14 +22,36 @@ export async function createDocumentModel(document: CreateDocument) {
 }
 
 export async function getSingleDocumentModel(documentId: number) {
-    try {
-        const [result] =await db.execute("SELECT * FROM documents WHERE document_id= ?", [documentId])
+  try {
+    const [result] = await db.execute(
+      `
+      SELECT
+        d.document_id,
+        d.title,
+        d.description,
+        d.file_name,
+        d.file_type,
+        d.file_size,
+        d.file_path,
+        d.created_at,
+        d.uploaded_by,
+        u.full_name AS uploaded_by_name,
+        c.category_name
+      FROM documents d
+      LEFT JOIN users u
+        ON d.uploaded_by = u.user_id
+      LEFT JOIN categories c
+        ON d.category_id = c.category_id
+      WHERE d.document_id = ?
+      `,
+      [documentId]
+    );
 
-        return result
-    } catch (error) {
-        console.error("Error creating document(model):", error);
-        throw error;
-    }
+    return result;
+  } catch (error) {
+    console.error("Error fetching document:", error);
+    throw error;
+  }
 }
 
 export async function getAllDocumentModel() {

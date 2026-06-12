@@ -11,14 +11,19 @@ type Document = {
   file_size: string;
   created_at: string;
   file_path: string;
+  uploaded_by: number;
 };
 
 export default function Document() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [search, setSearch] = useState("");
+  const [user, setUser] = useState<{user_id: number;
+    role: string;
+  } | null>(null);
 
   useEffect(() => {
     fetchDocuments();
+    fetchUser();
   }, []);
 
   const fetchDocuments = async () => {
@@ -81,6 +86,22 @@ export default function Document() {
 
     document.body.removeChild(link);
   };
+
+  const fetchUser = async () => {
+  try {
+    const response = await fetch("/api/users/me", {
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      setUser(data.user);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   return (
     <div className="min-h-screen bg-amber-50">
@@ -187,19 +208,25 @@ export default function Document() {
 
                       </a>
 
-                      <Link href={`/document/${doc.document_id}/edit`}>
-                        <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100">
-                          <Pencil size={18} />
-                        </button>
-                      </Link>
-
                       <button className="p-2 rounded-lg text-green-500 hover:bg-green-100" onClick={() => handleDownload(doc.file_path)}>
                         <Download size={18} />
                       </button>
 
-                      <button className="p-2 rounded-lg text-red-500 hover:bg-red-100" onClick={() => handleDelete(doc.document_id)}>
-                        <Trash2 size={18} />
-                      </button>
+                      {
+                        (user?.role === "ADMIN" || user?.user_id === doc.uploaded_by) && (
+                          <>
+                            <Link href={`/document/${doc.document_id}/edit`}>
+                              <button className="p-2 rounded-lg text-amber-500 hover:bg-amber-100 hover:text-amber-700">
+                                <Pencil size={18} />
+                              </button>
+                            </Link>
+
+                            <button onClick={() => handleDelete(doc.document_id)}  className="p-2 rounded-lg text-red-500 hover:bg-red-100 hover:text-red-700">
+                              <Trash2 size={18} />
+                            </button>
+                          </>
+                        )
+                      }
 
                     </div>
 

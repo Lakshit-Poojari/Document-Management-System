@@ -42,6 +42,10 @@ export default function DocumentDetails() {
 
       const data = await response.json();
 
+      console.log('====================================');
+      console.log(data);
+      console.log('====================================');
+
       if (response.ok) {
         setDoc(data[0]);
       }

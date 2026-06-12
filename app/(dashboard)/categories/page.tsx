@@ -14,9 +14,11 @@ type Category = {
 export default function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState("");
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     fetchCategories();
+    fetchUser();
   }, []);
 
   const fetchCategories = async () => {
@@ -67,7 +69,17 @@ export default function Categories() {
   }
 };
 
+  const fetchUser = async () => {
+  const response = await fetch("/api/users/me", {
+    credentials: "include",
+  });
 
+  const data = await response.json();
+
+  if (response.ok) {
+    setUser(data.user);
+  }
+};
 
   return (
     <div className="min-h-screen bg-amber-50 p-8">
@@ -86,11 +98,13 @@ export default function Categories() {
             </p>
           </div>
 
-          <Link href="/categories/create">
-            <button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition">
-              Add Category
-            </button>
-          </Link>
+          {user?.role === "ADMIN" && (
+            <Link href="/categories/create">
+              <button className="px-5 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600">
+                Add Category
+              </button>
+            </Link>
+          )}
 
         </div>
 
@@ -124,10 +138,12 @@ export default function Categories() {
                 <th className="px-4 py-4 text-left">
                   Documents
                 </th>
+                {user?.role === "ADMIN" && (
 
                 <th className="px-4 py-4 text-left">
                   Actions
                 </th>
+                 )}
               </tr>
 
             </thead>
@@ -152,24 +168,26 @@ export default function Categories() {
                       {category.total_documents}
                     </td>
 
-                    <td className="px-4 py-4">
+                    {user?.role === "ADMIN" && (
+  <td className="px-4 py-4">
+    <div className="flex gap-4">
 
-                      <div className="flex gap-4">
+      <Link href={`/categories/${category.category_id}/edit`}>
+        <button className="text-amber-500 p-2 rounded-lg hover:bg-amber-100">
+          <Pencil size={18} />
+        </button>
+      </Link>
 
-                        <Link href={`/categories/${category.category_id}/edit`} >
-                          <button className="text-amber-500 p-2 rounded-lg hover:bg-amber-100 hover:text-amber-700">
-                            <Pencil size={18} />
-                          </button>
-                        </Link>
+      <button
+        onClick={() => handleDelete(category.category_id)}
+        className="text-red-500 p-2 rounded-lg hover:bg-red-100"
+      >
+        <Trash2 size={18} />
+      </button>
 
-                        <button onClick={() => handleDelete(category.category_id)}
-                          className="text-red-500 p-2 rounded-lg hover:bg-red-100 hover:text-red-700">
-                          <Trash2 size={18} />
-                        </button>
-
-                      </div>
-
-                    </td>
+    </div>
+  </td>
+)}
 
                   </tr>
 

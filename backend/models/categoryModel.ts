@@ -17,7 +17,19 @@ export async function createCategoryModel(category: CreateCategory) {
 
 export async function getAllCategoriesModel() {
     try{
-        const [categories] = await db.execute("SELECT * FROM categories");
+        const [categories] = await db.execute(`SELECT
+    c.category_id,
+    c.category_name,
+    c.description,
+    COUNT(d.document_id) AS total_documents
+  FROM categories c
+  LEFT JOIN documents d
+    ON c.category_id = d.category_id
+  GROUP BY
+    c.category_id,
+    c.category_name,
+    c.description
+  ORDER BY c.category_id DESC`);
         return categories;
     }
     catch (error) {
