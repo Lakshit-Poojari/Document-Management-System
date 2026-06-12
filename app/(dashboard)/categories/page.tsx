@@ -40,6 +40,35 @@ export default function Categories() {
       .includes(search.toLowerCase())
   );
 
+  const handleDelete = async (id: number) => {
+  const confirmDelete = confirm(
+    "Are you sure you want to delete this category?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const response = await fetch(`/api/categories/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Category deleted successfully");
+
+      fetchCategories(); // Refresh table
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
   return (
     <div className="min-h-screen bg-amber-50 p-8">
 
@@ -108,9 +137,7 @@ export default function Categories() {
               {filteredCategories.length > 0 ? (
                 filteredCategories.map((category) => (
 
-                  <tr
-                    key={category.category_id}
-                    className="border-t hover:bg-amber-50"
+                  <tr key={category.category_id} className="border-t hover:bg-amber-50"
                   >
 
                     <td className="px-4 py-4">
@@ -129,17 +156,14 @@ export default function Categories() {
 
                       <div className="flex gap-4">
 
-                        <Link
-                          href={`/categories/${category.category_id}/edit`}
-                        >
+                        <Link href={`/categories/${category.category_id}/edit`} >
                           <button className="text-amber-500 p-2 rounded-lg hover:bg-amber-100 hover:text-amber-700">
                             <Pencil size={18} />
                           </button>
                         </Link>
 
-                        <button
-                          className="text-red-500 p-2 rounded-lg hover:bg-red-100 hover:text-red-700"
-                        >
+                        <button onClick={() => handleDelete(category.category_id)}
+                          className="text-red-500 p-2 rounded-lg hover:bg-red-100 hover:text-red-700">
                           <Trash2 size={18} />
                         </button>
 
